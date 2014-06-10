@@ -1,4 +1,4 @@
-function [signalHar, signalPer] = HPSeparation(filename)
+function [signalHar, signalPer, filenameHar, filenamePer, fs] = HPSeparation(filename)
 
 frameSize = 4096;
 hopsize = 1024;
@@ -49,9 +49,9 @@ for i=1:frameNum,
         signalHar(begin+1:begin+frameSize) + harframe;
 
 end
-signalHar = signalHar/max(abs(signalHar));
-signalPer = signalPer/max(abs(signalPer));
-filenameHar = [filename(1:end-4) '_per' '.wav'];
-filenamePer = [filename(1:end-4) 'har' '.wav'];
+signalHar = signalHar((frameSize + hopsize * (hlh-1)):length(signalHar))/max(abs(signalHar));
+signalPer = signalPer((frameSize + hopsize * (hlh-1)):length(signalHar))/max(abs(signalPer));
+filenameHar = [filename(1:end-4) '_har' '.wav'];
+filenamePer = [filename(1:end-4) '_per' '.wav'];
 wavwrite(signalHar, fs, filenameHar);
 wavwrite(signalPer, fs, filenamePer);
