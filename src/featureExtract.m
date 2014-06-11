@@ -64,6 +64,7 @@ for i=1:waveNum
         endIdx = floor((beat_time + 0.15) * wObj.fs);
         endIdx = min(endIdx, length(wObj.signal));
         frame = wObj.signal(startIdx:endIdx);
+        zcr=frame2zcr(frame);
         mfcc = frame2mfcc(frame, wObj.fs, 20, 12);
         
         
