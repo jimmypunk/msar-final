@@ -49,8 +49,9 @@ for i=1:frameNum,
         signalHar(begin+1:begin+frameSize) + harframe;
 
 end
-signalHar = signalHar((frameSize + hopsize * (hlh-1)):length(signalHar))/max(abs(signalHar));
-signalPer = signalPer((frameSize + hopsize * (hlh-1)):length(signalHar))/max(abs(signalPer));
+
+signalHar = signalHar((hopsize * (hlh-1)):length(signalHar))/max(abs(signalHar));
+signalPer = signalPer((hopsize * (hlh-1)):length(signalHar))/max(abs(signalPer));
 filenameHar = [filename(1:end-4) '_har' '.wav'];
 filenamePer = [filename(1:end-4) '_per' '.wav'];
 wavwrite(signalHar, fs, filenameHar);
